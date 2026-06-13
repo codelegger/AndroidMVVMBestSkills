@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.example.androidmvvmbestskills"
+    namespace = "com.codelegger.androidmvvmbestskills"
     compileSdk = 36
     defaultConfig {
-        applicationId = "com.example.androidmvvmbestskills"
+        applicationId = "com.codelegger.androidmvvmbestskills"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
