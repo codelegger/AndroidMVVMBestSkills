@@ -1,0 +1,27 @@
+package com.codelegger.androidmvvmbestskills.di
+
+import android.content.Context
+import androidx.room.Room
+import com.codelegger.androidmvvmbestskills.data.local.AppDatabase
+import com.codelegger.androidmvvmbestskills.data.local.dao.SampleDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.NAME)
+            .fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
+
+    @Provides
+    fun provideSampleDao(database: AppDatabase): SampleDao = database.sampleDao()
+}
