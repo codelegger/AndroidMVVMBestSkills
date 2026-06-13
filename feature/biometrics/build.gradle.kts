@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -13,6 +14,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 kotlin {
@@ -24,4 +28,10 @@ dependencies {
     implementation(libs.androidx.biometric)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.hilt.android)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
