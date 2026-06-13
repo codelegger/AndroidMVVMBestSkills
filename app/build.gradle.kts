@@ -52,6 +52,20 @@ dependencies {
   implementation(composeBom)
   androidTestImplementation(composeBom)
 
+  // Core modules
+  implementation(project(":core:common"))
+  implementation(project(":core:security"))
+  implementation(project(":core:network"))
+  implementation(project(":core:database"))
+  testImplementation(project(":core:testing"))
+
+  // Feature modules
+  implementation(project(":feature:auth"))
+  implementation(project(":feature:secure-storage"))
+  implementation(project(":feature:network-security"))
+  implementation(project(":feature:device-integrity"))
+  implementation(project(":feature:biometrics"))
+
   // Core Android
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)

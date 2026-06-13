@@ -19,3 +19,17 @@ plugins {
 
 rootProject.name = "AndroidMVVMBestSkills"
 include(":app")
+
+// Core modules: shared building blocks
+include(":core:common")
+include(":core:security")
+include(":core:network")
+include(":core:database")
+include(":core:testing")
+
+// Feature modules: user-facing capabilities
+include(":feature:auth")
+include(":feature:secure-storage")
+include(":feature:network-security")
+include(":feature:device-integrity")
+include(":feature:biometrics")
