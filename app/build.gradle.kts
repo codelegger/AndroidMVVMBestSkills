@@ -2,6 +2,8 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.ksp)
+  alias(libs.plugins.hilt)
 }
 
 android {
@@ -13,6 +15,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -48,37 +52,66 @@ dependencies {
   implementation(composeBom)
   androidTestImplementation(composeBom)
 
-  // Core Android dependencies
+  // Core Android
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
 
-  // Arch Components
+  // Lifecycle / ViewModel (MVVM)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-  // Compose
+  // Compose + Material 3
   implementation(libs.androidx.compose.ui)
+  implementation(libs.androidx.compose.ui.graphics)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
-  // Tooling
   debugImplementation(libs.androidx.compose.ui.tooling)
-  // Instrumented tests
-  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-  debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-  // Local tests: jUnit, coroutines, Android runner
+  // Navigation Compose
+  implementation(libs.androidx.navigation.compose)
+
+  // Hilt
+  implementation(libs.hilt.android)
+  ksp(libs.hilt.compiler)
+  implementation(libs.androidx.hilt.navigation.compose)
+
+  // Room
+  implementation(libs.androidx.room.runtime)
+  implementation(libs.androidx.room.ktx)
+  ksp(libs.androidx.room.compiler)
+
+  // Networking: Retrofit + Moshi + OkHttp
+  implementation(libs.retrofit)
+  implementation(libs.retrofit.converter.moshi)
+  implementation(libs.moshi)
+  ksp(libs.moshi.kotlin.codegen)
+  implementation(platform(libs.okhttp.bom))
+  implementation(libs.okhttp)
+  implementation(libs.okhttp.logging.interceptor)
+
+  // Coroutines
+  implementation(libs.kotlinx.coroutines.android)
+
+  // WorkManager + Hilt integration
+  implementation(libs.androidx.work.runtime.ktx)
+  implementation(libs.androidx.hilt.work)
+  ksp(libs.androidx.hilt.compiler)
+
+  // Unit tests
   testImplementation(libs.junit)
   testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.mockk)
+  testImplementation(libs.turbine)
+  testImplementation(libs.truth)
+  testImplementation(libs.androidx.room.testing)
 
-  // Instrumented tests: jUnit rules and runners
+  // Instrumented tests
   androidTestImplementation(libs.androidx.test.core)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.test.espresso.core)
-
-  // Navigation
-  implementation(libs.androidx.navigation3.ui)
-  implementation(libs.androidx.navigation3.runtime)
-  implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+  androidTestImplementation(libs.mockk.android)
+  debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
