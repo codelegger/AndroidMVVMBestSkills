@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network security policy:
+  - Cleartext (HTTP) traffic is disabled app-wide.
+  - User-added CAs are not trusted (system CAs only), defeating user-installed
+    proxy certificates on production builds.
+  - The optional debug-overrides block (commented out) is where you would allow a
+    debug CA for local proxy/inspection in debuggable builds only.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!--
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+    -->
+</network-security-config>
